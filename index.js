@@ -93,6 +93,29 @@ function create(server, fn) {
   }
 
   //
+  // Setup an addition redirect server which redirects people to the correct
+  // HTTP or HTTPS server.
+  //
+  if (+options.redirect) require('http').createServer(function handle(req, res) {
+    res.statusCode = 404;
+
+    if (req.headers.host) {
+      res.statusCode = 301;
+      res.setHeader(
+        'Location',
+        'http'+ (secure ? 's' : '') +'://'+ req.headers.host + req.url
+      );
+    }
+
+    if (secure) res.setHeader(
+      'Strict-Transport-Security',
+      'max-age=8640000; includeSubDomains'
+    );
+
+    res.end('');
+  }).listen(+options.redirect);
+
+  //
   // Assign the last callbacks.
   //
   if (fn.request) server.on('request', fn.request);

@@ -1,0 +1,32 @@
+{
+  "name": "create-server",
+  "version": "0.0.0",
+  "description": "Create a pre-configured HTTP server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/primus/create-server"
+  },
+  "keywords": [
+    "create",
+    "server",
+    "servers",
+    "http",
+    "https",
+    "spdy",
+    "create-server",
+    "create-servers"
+  ],
+  "author": "Arnout Kazemier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/primus/create-server/issues"
+  },
+  "homepage": "https://github.com/primus/create-server",
+  "dependencies": {
+    "connected": "0.0.0"
+  }
+}

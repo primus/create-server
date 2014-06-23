@@ -23,8 +23,6 @@ function is(obj) {
  * @returns {Server} The created server.
  */
 function create(server, fn) {
-  fn = create.fn(fn);
-
   var options;
 
   switch (is(server)) {
@@ -35,7 +33,13 @@ function create(server, fn) {
     case 'number':
       options = { port: server };
     break;
+
+    default:
+      options = {};
+    break;
   }
+
+  fn = create.fns(fn || options);
 
   var port = options.port || 443                // Force HTTPS by default.
     , certs = options.key && options.cert       // Check HTTPS certs.

@@ -130,8 +130,11 @@ function create(server, fn) {
   //
   if (fn[type]) fn[type]();
 
-  if (options.listen === false || !fn.listening) return server;
-  return listen(server, port, fn.listening);
+  if (options.listen !== false && fn.listening) {
+    listen(server, port, fn.listening);
+  }
+
+  return server;
 }
 
 /**

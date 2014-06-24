@@ -82,18 +82,10 @@ function create(server, fn) {
     });
   }
 
-  switch (type) {
-    case 'http':
-      server = require('http').createServer();
-    break;
-
-    case 'https':
-      server = require('https').createServer(options);
-    break;
-
-    case 'spdy':
-      server = require('spdy').createServer(options);
-    break;
+  if ('http' === type) {
+    server = require('http').createServer();
+  } else {
+    server = require(type).createServer(options);
   }
 
   //
@@ -122,8 +114,10 @@ function create(server, fn) {
   //
   // Assign the last callbacks.
   //
-  if (fn.request) server.on('request', fn.request);
   if (fn.close) server.once('close', fn.close);
+  ['request', 'upgrade', 'error'].forEach(function each(event) {
+    if (fn[event]) server.on('request', fn[event]);
+  });
 
   //
   // Things are completed, call callback.
@@ -153,7 +147,7 @@ create.fns = function fns(fn) {
   }
 
   [
-    'close', 'request', 'listening',
+    'close', 'request', 'listening', 'upgrade', 'error',
     'http', 'https', 'spdy'
   ].forEach(function each(name) {
     if ('function' !== typeof fn[name]) return;

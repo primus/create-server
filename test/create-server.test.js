@@ -60,4 +60,29 @@ describe('create server', function () {
       next();
     }});
   });
+
+  it('creates a HTTPS server when given certs', function (next) {
+    server = create({
+      port: ++port,
+      root: __dirname,
+      cert: './ssl/server.crt',
+      key: './ssl/server.key',
+      listening: next
+    });
+
+    assume(server).to.be.instanceOf(https.Server);
+  });
+
+  it('creates a SPDY server when given the SPDY boolean', function (next) {
+    server = create({
+      port: ++port,
+      root: __dirname,
+      cert: './ssl/server.crt',
+      key: './ssl/server.key',
+      listening: next,
+      spdy: true
+    });
+
+    assume(server).to.be.instanceOf(spdy.Server);
+  });
 });

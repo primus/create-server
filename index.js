@@ -116,7 +116,7 @@ function create(server, fn) {
   //
   if (fn.close) server.once('close', fn.close);
   ['request', 'upgrade', 'error'].forEach(function each(event) {
-    if (fn[event]) server.on('request', fn[event]);
+    if (fn[event]) server.on(event, fn[event]);
   });
 
   //

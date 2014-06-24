@@ -79,10 +79,12 @@ describe('create server', function () {
       root: __dirname,
       cert: './ssl/server.crt',
       key: './ssl/server.key',
-      listening: next,
-      spdy: true
+      spdy: true,
+      listening: next
     });
 
-    assume(server).to.be.instanceOf(spdy.Server);
+    // spdy is spiced up HTTPS server
+    assume(server).to.be.instanceOf(https.Server);
+    assume(server).to.be.instanceOf(spdy.server.Server);
   });
 });

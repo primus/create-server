@@ -1,5 +1,8 @@
 # create-server
 
+[![Build Status](https://travis-ci.org/primus/create-server.svg?branch=master)](https://travis-ci.org/primus/create-server)
+[![NPM version](https://badge.fury.io/js/create-server.svg)](http://badge.fury.io/js/create-server)
+
 I've found my self writing this particular piece of snippet over and over again.
 If you need to have a common API for creating a HTTP, HTTPS or SPDY server this
 might be the module that you've been waiting for.

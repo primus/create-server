@@ -126,6 +126,8 @@ function create(server, fn) {
 
   if (options.listen !== false) {
     listen(server, port, fn.listening);
+  } else if (fn.listening) {
+    server.once('listening', fn.listening);
   }
 
   return server;

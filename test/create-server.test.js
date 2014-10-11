@@ -12,9 +12,19 @@ describe('create server', function () {
     , spdy = require('spdy');
 
   afterEach(function (next) {
-    if (server) try { server.close(next); }
-    catch (e) { process.nextTick(next); }
-    else process.nextTick(next);
+    if (!server) return next();
+
+    try {
+      server.close(function () {
+        //
+        // We can't use `server.close(next);` directly because in node > 0.10
+        // the callback receives an error when the server is not running.
+        //
+        next();
+      });
+    } catch (e) {
+      process.nextTick(next);
+    }
 
     server = undefined;
   });

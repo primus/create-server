@@ -36,6 +36,7 @@
     "istanbul": "0.3.x",
     "mocha": "1.21.x",
     "pre-commit": "0.0.x",
+    "request": "2.45.x",
     "spdy": "1.29.x"
   }
 }

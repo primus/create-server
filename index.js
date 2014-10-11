@@ -1,6 +1,7 @@
 'use strict';
 
 var listen = require('connected')
+  , parse = require('url').parse
   , path = require('path')
   , fs = require('fs');
 
@@ -96,10 +97,12 @@ function create(server, fn) {
     res.statusCode = 404;
 
     if (req.headers.host) {
+      var url = parse('http://'+ req.headers.host);
+
       res.statusCode = 301;
       res.setHeader(
         'Location',
-        'http'+ (secure ? 's' : '') +'://'+ req.headers.host + req.url
+        'http'+ (secure ? 's' : '') +'://'+ url.hostname +':'+ port + req.url
       );
     }
 

@@ -4,9 +4,9 @@
   "description": "Create a pre-configured HTTP server",
   "main": "index.js",
   "scripts": {
-    "coverage": "istanbul cover node_modules/.bin/_mocha -- --reporter spec",
+    "coverage": "istanbul cover node_modules/.bin/_mocha",
     "test": "mocha $(find test -name '*.test.js')",
-    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec"
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly"
   },
   "repository": {
     "type": "git",
@@ -32,11 +32,11 @@
     "connected": "0.0.x"
   },
   "devDependencies": {
-    "assume": "0.0.x",
+    "assume": "1.1.x",
     "istanbul": "0.3.x",
-    "mocha": "1.21.x",
-    "pre-commit": "0.0.x",
-    "request": "2.45.x",
-    "spdy": "1.29.x"
+    "mocha": "2.1.x",
+    "pre-commit": "1.0.x",
+    "request": "2.53.x",
+    "spdy": "1.31.x"
   }
 }

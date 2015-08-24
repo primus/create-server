@@ -32,11 +32,11 @@
     "connected": "0.0.x"
   },
   "devDependencies": {
-    "assume": "1.1.x",
+    "assume": "1.2.x",
     "istanbul": "0.3.x",
-    "mocha": "2.1.x",
-    "pre-commit": "1.0.x",
-    "request": "2.53.x",
-    "spdy": "1.31.x"
+    "mocha": "2.2.x",
+    "pre-commit": "1.1.x",
+    "request": "2.61.x",
+    "spdy": "2.0.x"
   }
 }

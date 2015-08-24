@@ -24,29 +24,19 @@ function is(obj) {
  * @returns {Server} The created server.
  */
 function create(server, fn) {
-  var options;
+  var type = is(server)
+    , options;
 
-  switch (is(server)) {
-    case 'object':
-      options = server;
-    break;
-
-    case 'number':
-      options = { port: server };
-    break;
-
-    default:
-      options = {};
-    break;
-  }
+  if ('object' === type) options = server;
+  else if ('number' === type) options = { port: server };
+  else options = {};
 
   fn = create.fns(fn || options);
 
   var port = options.port || 443                // Force HTTPS by default.
     , certs = options.key && options.cert       // Check HTTPS certs.
-    , secure = certs || 443 === port            // Check for true HTTPS
-    , spdy = 'spdy' in options                  // Or are we spdy
-    , type;
+    , secure = certs || 443 === port            // Check for true HTTPS.
+    , spdy = 'spdy' in options;                 // Or are we spdy.
 
   //
   // Determine which type of server we need to create.
@@ -83,11 +73,45 @@ function create(server, fn) {
     });
   }
 
-  if ('http' === type) {
-    server = require('http').createServer();
-  } else {
-    server = require(type).createServer(options);
+  //
+  // Provide additional protection for HTTPS server by supplying a safer cypher
+  // set and prevent POODLE attacks on the servers.
+  //
+  if (secure) {
+    //
+    // Protection against POODLE attacks.
+    //
+    options.secureProtocol = options.secureProtocol || 'SSLv23_method';
+    options.secureOptions = options.secureOptions || require('constants').SSL_OP_NO_SSLv3;
+
+    //
+    // Optimized cipher list.
+    //
+    options.ciphers = options.ciphers || [
+      'ECDHE-RSA-AES256-SHA384',
+      'DHE-RSA-AES256-SHA384',
+      'ECDHE-RSA-AES256-SHA256',
+      'DHE-RSA-AES256-SHA256',
+      'ECDHE-RSA-AES128-SHA256',
+      'DHE-RSA-AES128-SHA256',
+      'HIGH',
+      '!aNULL',
+      '!eNULL',
+      '!EXPORT',
+      '!DES',
+      '!RC4',
+      '!MD5',
+      '!PSK',
+      '!SRP',
+      '!CAMELLIA'
+    ].join(':');
   }
+
+  //
+  // Create the correct server instance and pass in the options object for those
+  // who require it (spoiler: all non http servers).
+  //
+  server = require(type).createServer('http' !== type && options);
 
   //
   // Setup an addition redirect server which redirects people to the correct

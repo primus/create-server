@@ -1,6 +1,6 @@
 {
   "name": "create-server",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "Create a pre-configured HTTP server",
   "main": "index.js",
   "scripts": {

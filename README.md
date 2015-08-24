@@ -57,6 +57,12 @@ The following properties can be provided as callback object:
 - **http**: A new HTTP server has been created.
 - **spdy**: A new SPDY server has been created.
 
+When creating a secure server, we will do our best to provide sane defaults that
+will protect your server against known secure server attacks such as POODLE, we
+also update the cipher list to prevent attacks such as heart bleed. This can be
+overridden by supplying your own `cypher`, `secureProtocol` and `secureOptions`
+keys as option.
+
 ## License
 
 MIT

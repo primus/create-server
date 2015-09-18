@@ -1,17 +1,15 @@
 language: node_js
 node_js:
-  - "iojs-v3"
-  - "iojs-v2"
-  - "iojs-v1"
+  - "4"
+  - "3"
+  - "2"
+  - "1"
   - "0.12"
   - "0.10"
-  - "0.8"
-before_install:
-  - 'if [ "${TRAVIS_NODE_VERSION}" == "0.8" ] ; then npm install -g npm@2.7.0; fi'
 script:
   - "npm run test-travis"
 after_script:
-  - "npm install coveralls@2.11.x && cat coverage/lcov.info | coveralls"
+  - "npm install coveralls@2 && cat coverage/lcov.info | coveralls"
 notifications:
   irc:
     channels:

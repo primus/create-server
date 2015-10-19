@@ -55,6 +55,23 @@ describe('create server', function () {
     assume(server).to.be.instanceOf(http.Server);
   });
 
+  it('allows to specify the bind address', function (next) {
+    server = create({
+      hostname: 'localhost',
+      port: ++port
+    }, {
+      listening: function (err) {
+        if (err) return next(err);
+
+        var address = server.address();
+
+        assume(address.address).to.equal('127.0.0.1');
+        assume(address.port).to.equal(port);
+        next();
+      }
+    });
+  });
+
   it('proxies errors to the listener', function (next) {
     server = create(80, { listening: function (err) {
       if (!err) throw new Error('Port 80 should be restricted, we are not root');

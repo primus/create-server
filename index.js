@@ -33,8 +33,9 @@ function create(server, fn) {
 
   fn = create.fns(fn || options);
 
-  var port = options.port || 443                // Force HTTPS by default.
-    , certs = options.key && options.cert       // Check HTTPS certs.
+  var certs = options.key && options.cert       // Check HTTPS certs.
+    , hostname = options.hostname               // Bind address.
+    , port = options.port || 443                // Force HTTPS by default.
     , secure = certs || 443 === port            // Check for true HTTPS.
     , spdy = 'spdy' in options;                 // Or are we spdy.
 
@@ -137,7 +138,7 @@ function create(server, fn) {
       );
 
       res.end('');
-    }).listen(+options.redirect);
+    }).listen(+options.redirect, hostname);
 
     //
     // Close the redirect server when the main server is closed.
@@ -162,7 +163,7 @@ function create(server, fn) {
   if (fn[type]) fn[type]();
 
   if (options.listen !== false) {
-    listen(server, port, fn.listening);
+    listen(server, port, hostname, fn.listening);
   } else if (fn.listening) {
     server.once('listening', fn.listening);
   }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "coverage": "istanbul cover _mocha",
-    "test": "mocha $(find test -name '*.test.js')",
+    "test": "mocha test/*.test.js",
     "test-travis": "istanbul cover _mocha --report lcovonly"
   },
   "repository": {
@@ -34,9 +34,9 @@
   "devDependencies": {
     "assume": "1.4.x",
     "istanbul": "0.4.x",
-    "mocha": "~3.1.2",
+    "mocha": "3.1.x",
     "pre-commit": "1.1.x",
-    "request": "~2.78.0",
-    "spdy": "~3.4.4"
+    "request": "2.78.x",
+    "spdy": "3.4.x"
   }
 }

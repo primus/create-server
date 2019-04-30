@@ -112,7 +112,7 @@ function create(server, fn) {
   // Create the correct server instance and pass in the options object for those
   // who require it (spoiler: all non http servers).
   //
-  server = require(type).createServer('http' !== type && options);
+  server = require(type).createServer('http' !== type ? options : undefined);
 
   //
   // Setup an addition redirect server which redirects people to the correct

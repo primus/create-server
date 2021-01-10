@@ -4,7 +4,7 @@
   "description": "Create a pre-configured HTTP server",
   "main": "index.js",
   "scripts": {
-    "test": "c8 --reporter=html --reporter=text mocha test/*.test.js"
+    "test": "c8 --reporter=lcov --reporter=text mocha test/*.test.js"
   },
   "repository": {
     "type": "git",

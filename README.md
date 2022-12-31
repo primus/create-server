@@ -1,6 +1,6 @@
 # create-server
 
-[![Version npm](https://img.shields.io/npm/v/create-server.svg?style=flat-square)](https://www.npmjs.com/package/create-server)[![Build Status](https://img.shields.io/github/workflow/status/primus/create-server/CI/master?label=CI&style=flat-square)](https://github.com/primus/create-server/actions?query=workflow%3ACI+branch%3Amaster)[![Coverage Status](https://img.shields.io/coveralls/primus/create-server/master.svg?style=flat-square)](https://coveralls.io/r/primus/create-server?branch=master)
+[![Version npm](https://img.shields.io/npm/v/create-server.svg?style=flat-square)](https://www.npmjs.com/package/create-server)[![CI](https://img.shields.io/github/actions/workflow/status/primus/create-server/ci.yml?branch=master&label=CI&style=flat-square)](https://github.com/primus/create-server/actions?query=workflow%3ACI+branch%3Amaster)[![Coverage Status](https://img.shields.io/coveralls/primus/create-server/master.svg?style=flat-square)](https://coveralls.io/r/primus/create-server?branch=master)
 
 I've found my self writing this particular piece of snippet over and over again.
 If you need to have a common API for creating a HTTP, HTTPS or SPDY server this
